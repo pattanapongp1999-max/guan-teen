@@ -8,24 +8,20 @@
       margin: 0;
       height: 100vh;
       font-family: Arial, sans-serif;
-
-      /* WALLPAPER */
       background-image: url("https://images.unsplash.com/photo-1517841905240-472988babdf9");
       background-size: cover;
       background-position: center;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       overflow: hidden;
     }
 
     h1 {
-      background: rgba(255, 255, 255, 0.85);
+      position: absolute;
+      top: 25%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.85);
       padding: 20px 40px;
       border-radius: 16px;
-      margin-bottom: 40px;
     }
 
     button {
@@ -34,40 +30,56 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: transform 0.15s;
       position: absolute;
     }
 
     .yes {
       background: #4CAF50;
       color: #fff;
-      position: relative;
+      top: 50%;
+      left: 45%;
+      transform: translate(-50%, -50%);
     }
 
     .no {
       background: #f44336;
       color: #fff;
-    }
 
-    button:hover {
-      transform: scale(1.05);
+      /* จุดเริ่มต้นตรงกลาง */
+      top: 50%;
+      left: 55%;
+      transform: translate(-50%, -50%);
+
+      /* ทำให้ลื่น */
+      transition: left 0.35s ease, top 0.35s ease;
     }
   </style>
 </head>
 <body>
 
   <h1>บี๋รักเค้ามั้ย? 💖</h1>
-  <div style="text-align: center;"> 
+
   <button class="yes" onclick="answer()">รัก</button>
   <button class="no" id="noBtn">ไม่รัก</button>
-  </div>
+
   <script>
     const noBtn = document.getElementById("noBtn");
+    let lastMove = 0;
 
-    // ตั้งตำแหน่งเริ่มต้น
-    moveButton();
+    document.addEventListener("mousemove", (e) => {
+      const rect = noBtn.getBoundingClientRect();
 
-    noBtn.addEventListener("mouseover", moveButton);
+      const distance = Math.hypot(
+        e.clientX - (rect.left + rect.width / 2),
+        e.clientY - (rect.top + rect.height / 2)
+      );
+
+      // ถ้าเมาส์เข้าใกล้ในระยะนี้ → หนี
+      if (distance < 120 && Date.now() - lastMove > 200) {
+        moveButton();
+        lastMove = Date.now();
+      }
+    });
 
     function moveButton() {
       const padding = 20;
@@ -79,6 +91,7 @@
 
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
+      noBtn.style.transform = "none";
     }
 
     function answer() {
