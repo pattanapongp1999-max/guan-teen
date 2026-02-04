@@ -7,50 +7,46 @@
     body {
       margin: 0;
       height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       font-family: Arial, sans-serif;
 
       /* WALLPAPER */
       background-image: url("https://images.unsplash.com/photo-1517841905240-472988babdf9");
       background-size: cover;
       background-position: center;
-    }
 
-    .container {
-      text-align: center;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 40px 60px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
     }
 
     h1 {
-      margin-bottom: 30px;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 20px 40px;
+      border-radius: 16px;
+      margin-bottom: 40px;
     }
 
     button {
-      padding: 12px 30px;
-      margin: 0 10px;
-      font-size: 16px;
+      padding: 14px 34px;
+      font-size: 18px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
-      transition: 0.2s;
-      position: relative;
+      transition: transform 0.15s;
+      position: absolute;
     }
 
     .yes {
       background: #4CAF50;
       color: #fff;
+      position: relative;
     }
 
     .no {
       background: #f44336;
       color: #fff;
-      position: absolute;
     }
 
     button:hover {
@@ -60,33 +56,33 @@
 </head>
 <body>
 
-  <div class="container" id="box">
-    <h1>บี๋รักเค้ามั้ย? 💖</h1>
-    <button class="yes" onclick="answer('yes')">รัก</button>
-    <button class="no" id="noBtn">ไม่รัก</button>
-  </div>
+  <h1>บี๋รักเค้ามั้ย? 💖</h1>
+
+  <button class="yes" onclick="answer()">รัก</button>
+  <button class="no" id="noBtn">ไม่รัก</button>
 
   <script>
     const noBtn = document.getElementById("noBtn");
-    const box = document.getElementById("box");
 
-    noBtn.addEventListener("mouseover", () => {
-      const boxRect = box.getBoundingClientRect();
+    // ตั้งตำแหน่งเริ่มต้น
+    moveButton();
 
-      const maxX = boxRect.width - noBtn.offsetWidth;
-      const maxY = boxRect.height - noBtn.offsetHeight;
+    noBtn.addEventListener("mouseover", moveButton);
+
+    function moveButton() {
+      const padding = 20;
+      const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+      const maxY = window.innerHeight - noBtn.offsetHeight - padding;
 
       const x = Math.random() * maxX;
       const y = Math.random() * maxY;
 
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
-    });
+    }
 
-    function answer(value) {
-      if (value === 'yes') {
-        alert('เย้ เค้าก็รักบี๋นะ 💕');
-      }
+    function answer() {
+      alert("เย้~ เค้าก็รักบี๋ที่สุดเลย 💕🥰");
     }
   </script>
 
