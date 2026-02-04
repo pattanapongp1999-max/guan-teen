@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
   <meta charset="UTF-8">
   <title>Question Page</title>
@@ -56,16 +57,21 @@
     }
   </style>
 </head>
+
 <body>
 
   <h1>บี๋รักเค้ามั้ย? 💖</h1>
 
-  <button class="yes" onclick="answer()">รัก😘</button>
+  <button class="yes" onclick="goNext()">รัก😘</button>
   <button class="no" id="noBtn">ไม่รัก😘</button>
 
   <script>
     const noBtn = document.getElementById("noBtn");
     let lastMove = 0;
+
+    function goNext() {
+      window.location.href = "love.html";
+    }
 
     document.addEventListener("mousemove", (e) => {
       const rect = noBtn.getBoundingClientRect();
@@ -101,4 +107,5 @@
   </script>
 
 </body>
+
 </html>
