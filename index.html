@@ -7,110 +7,119 @@
 
 
 <head>
-  <meta charset="UTF-8">
-  <title>Question Page</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      font-family: 'Prompt', sans-serif;
-      background-color: black;
-      background-size: cover;
-      background-position: center;
-      overflow: hidden;
-    }
+    <meta charset="UTF-8">
+    <title>Question Page</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            font-family: 'Prompt', sans-serif;
+            background-color: black;
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
 
-    h1 {
-      position: absolute;
-      top: 25%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: transparent;
-      padding: 20px 40px;
-      border-radius: 16px;
-      color: white;
-    }
+        h1 {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: transparent;
+            padding: 20px 40px;
+            border-radius: 16px;
+            color: white;
+        }
 
-    button {
-      padding: 14px 34px;
-      font-size: 18px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      position: absolute;
-    }
+        button {
+            padding: 14px 34px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            position: absolute;
+        }
 
-    .yes {
-      background: #4CAF50;
-      color: #fff;
-      top: 50%;
-      left: 45%;
-      transform: translate(-50%, -50%);
-    }
+        .yes {
+            background: #4CAF50;
+            color: #fff;
+            top: 50%;
+            left: 45%;
+            transform: translate(-50%, -50%);
+        }
 
-    .no {
-      background: #f44336;
-      color: #fff;
+        .no {
+            background: #f44336;
+            color: #fff;
 
-      /* จุดเริ่มต้นตรงกลาง */
-      top: 50%;
-      left: 55%;
-      transform: translate(-50%, -50%);
+            /* จุดเริ่มต้นตรงกลาง */
+            top: 50%;
+            left: 55%;
+            transform: translate(-50%, -50%);
 
-      /* ทำให้ลื่น */
-      transition: left 0.35s ease, top 0.35s ease;
-    }
-  </style>
+            /* ทำให้ลื่น */
+            transition: left 0.35s ease, top 0.35s ease;
+        }
+    </style>
 </head>
 
 <body>
 
-  <audio id="bgm" loop muted>
-     <source src="love-languages.mp3" type="audio/mpeg">
-  </audio>
+    <audio id="bgm" loop>
+        <source src="love-languages.mp3" type="audio/mpeg">
+    </audio>
 
-  <h1>บี๋รักเค้ามั้ย? 💖</h1>
 
-  <button class="yes" onclick="goNext()">รัก😘</button>
-  <button class="no" id="noBtn">ไม่รัก😒</button>
+    <h1>บี๋รักเค้ามั้ย? 💖</h1>
 
-  <script>
-    const noBtn = document.getElementById("noBtn");
-    let lastMove = 0;
+    <button class="yes" onclick="loveClick()">รัก😘</button>
+    <button class="no" id="noBtn">ไม่รัก😒</button>
 
-    function goNext() {
-      window.location.href = "love.html";
-    }
+    <script>
+        const noBtn = document.getElementById("noBtn");
+        let lastMove = 0;
 
-    document.addEventListener("mousemove", (e) => {
-      const rect = noBtn.getBoundingClientRect();
+        document.addEventListener("mousemove", (e) => {
+            const rect = noBtn.getBoundingClientRect();
 
-      const distance = Math.hypot(
-        e.clientX - (rect.left + rect.width / 2),
-        e.clientY - (rect.top + rect.height / 2)
-      );
+            const distance = Math.hypot(
+                e.clientX - (rect.left + rect.width / 2),
+                e.clientY - (rect.top + rect.height / 2)
+            );
 
-      // ถ้าเมาส์เข้าใกล้ในระยะนี้ → หนี
-      if (distance < 120 && Date.now() - lastMove > 200) {
-        moveButton();
-        lastMove = Date.now();
-      }
-    });
+            // ถ้าเมาส์เข้าใกล้ในระยะนี้ → หนี
+            if (distance < 120 && Date.now() - lastMove > 200) {
+                moveButton();
+                lastMove = Date.now();
+            }
+        });
 
-    function moveButton() {
-      const padding = 20;
-      const maxX = window.innerWidth - noBtn.offsetWidth - padding;
-      const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+        function moveButton() {
+            const padding = 20;
+            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
 
-      const x = Math.random() * maxX;
-      const y = Math.random() * maxY;
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
 
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-      noBtn.style.transform = "none";
-    }
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+            noBtn.style.transform = "none";
+        }
 
-  </script>
+    </script>
+
+    <script>
+        const bgm = document.getElementById("bgm");
+
+        function loveClick() {
+            bgm.muted = false;
+            bgm.volume = 0.6;
+
+            alert("เค้าก็รักบี๋เหมือนกันนะ 💕🥰");
+        }
+    </script>
+
 
 </body>
 
