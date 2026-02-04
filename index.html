@@ -110,15 +110,102 @@
     </script>
 
     <script>
-        const bgm = document.getElementById("bgm");
-
         function loveClick() {
             bgm.muted = false;
             bgm.volume = 0.6;
 
-            alert("เค้าก็รักบี๋เหมือนกันนะ 💕🥰");
+            overlay.classList.add("show");
+        }
+
+        function closePopup() {
+            overlay.classList.remove("show");
         }
     </script>
+
+    <script>
+        const bgm = document.getElementById("bgm");
+        let unlocked = false;
+
+        document.addEventListener("click", () => {
+            if (!unlocked) {
+                bgm.muted = false;
+                bgm.volume = 0.6;
+                unlocked = true;
+            }
+        }, { once: true });
+    </script>
+
+
+
+    <div class="overlay" id="overlay">
+        <div class="popup">
+            <h2>เค้าก็รักบี๋นะ 💕</h2>
+            <p>อยู่กับเค้านานๆนะะะะ 🥰</p>
+            <button onclick="closePopup()">ได้คั้บบบบ 💖</button>
+        </div>
+    </div>
+
+
+    <style>
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popup {
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 20px;
+            text-align: center;
+            font-family: 'Prompt', sans-serif;
+            animation: pop 0.3s ease;
+        }
+
+        .popup h2 {
+            margin-top: 0;
+            color: #e91e63;
+        }
+
+        .popup button {
+            margin-top: 20px;
+            background: #e91e63;
+            color: #fff;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        @keyframes pop {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+
 
 
 </body>
