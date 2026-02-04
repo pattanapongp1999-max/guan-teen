@@ -11,15 +11,20 @@
       justify-content: center;
       align-items: center;
       font-family: Arial, sans-serif;
-      background: #f5f5f5;
+
+      /* WALLPAPER */
+      background-image: url("https://images.unsplash.com/photo-1517841905240-472988babdf9");
+      background-size: cover;
+      background-position: center;
     }
 
     .container {
       text-align: center;
-      background: #fff;
+      background: rgba(255, 255, 255, 0.9);
       padding: 40px 60px;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      position: relative;
     }
 
     h1 {
@@ -34,6 +39,7 @@
       border-radius: 8px;
       cursor: pointer;
       transition: 0.2s;
+      position: relative;
     }
 
     .yes {
@@ -44,6 +50,7 @@
     .no {
       background: #f44336;
       color: #fff;
+      position: absolute;
     }
 
     button:hover {
@@ -53,18 +60,32 @@
 </head>
 <body>
 
-  <div class="container">
-    <h1>คุณโอเคกับสิ่งนี้ไหม?</h1>
-    <button class="yes" onclick="answer('yes')">Yes</button>
-    <button class="no" onclick="answer('no')">No</button>
+  <div class="container" id="box">
+    <h1>บี๋รักเค้ามั้ย? 💖</h1>
+    <button class="yes" onclick="answer('yes')">รัก</button>
+    <button class="no" id="noBtn">ไม่รัก</button>
   </div>
 
   <script>
+    const noBtn = document.getElementById("noBtn");
+    const box = document.getElementById("box");
+
+    noBtn.addEventListener("mouseover", () => {
+      const boxRect = box.getBoundingClientRect();
+
+      const maxX = boxRect.width - noBtn.offsetWidth;
+      const maxY = boxRect.height - noBtn.offsetHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+
     function answer(value) {
       if (value === 'yes') {
-        alert('คุณตอบ YES 👍');
-      } else {
-        alert('คุณตอบ NO 👎');
+        alert('เย้ เค้าก็รักบี๋นะ 💕');
       }
     }
   </script>
