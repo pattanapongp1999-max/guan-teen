@@ -131,6 +131,22 @@
     </script>
 
     <script>
+        const audio = document.getElementById("bgm");
+
+        function startMusic() {
+            audio.play().catch(() => { });
+
+            // เล่นครั้งเดียวพอ
+            document.removeEventListener("click", startMusic);
+            document.removeEventListener("touchstart", startMusic);
+        }
+
+        // แตะตรงไหนก็ได้
+        document.addEventListener("click", startMusic);
+        document.addEventListener("touchstart", startMusic);
+    </script>
+
+    <script>
         function loveClick() {
             bgm.muted = false;
             bgm.volume = 0.6;
